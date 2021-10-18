@@ -1,2 +1,1 @@
-# course-directory
- t
+# A course directory
