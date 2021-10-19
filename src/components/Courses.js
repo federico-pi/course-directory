@@ -5,9 +5,8 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-import HTML from './courses/HTML';
-import CSS from './courses/CSS';
-import JavaScript from './courses/JavaScript';
+import CourseContainer from './courses/CourseContainer';
+import { HTMLCourses, CSSCourses, JSCourses } from '../data/courses';
 import NotFound from './NotFound';
 
 const Courses = ({match}) => (
@@ -22,9 +21,9 @@ const Courses = ({match}) => (
     </div>
     <Switch>
       <Route exact path={match.path} render={ () => <Redirect to={`${match.path}/html`} /> } />
-      <Route exact path={`${match.path}/html`} component={HTML} />
-      <Route exact path={`${match.path}/css`} component={CSS} />
-      <Route exact path={`${match.path}/javascript`} component={JavaScript} />
+      <Route exact path={`${match.path}/html`} render={ () => <CourseContainer data={HTMLCourses} /> } />
+      <Route exact path={`${match.path}/css`} render={ () => <CourseContainer data={CSSCourses} /> } />
+      <Route exact path={`${match.path}/javascript`} render={ () => <CourseContainer data={JSCourses} /> } />
       <Route component={NotFound} />
     </Switch>
   </div>
