@@ -1,17 +1,32 @@
 import React from 'react';
+import {
+  Route,
+  NavLink,
+  Redirect,
+  Switch
+} from 'react-router-dom';
+import HTML from './courses/HTML';
+import CSS from './courses/CSS';
+import JavaScript from './courses/JavaScript';
+import NotFound from './NotFound';
 
-const Courses = () => (
+const Courses = ({match}) => (
   <div className="main-content courses">
     <div className="course-header group">
       <h2>Courses</h2> 
       <ul className="course-nav">
-        <li><a href='/courses/html'>HTML</a></li>
-        <li><a href='/courses/css'>CSS</a></li>
-        <li><a href='/courses/javascript'>JavaScript</a></li>
+        <li><NavLink to={`${match.url}/html`}>HTML</NavLink></li>
+        <li><NavLink to={`${match.url}/css`}>CSS</NavLink></li>
+        <li><NavLink to={`${match.url}/javascript`}>JavaScript</NavLink></li>
       </ul>
     </div>
-    
-    {/* Write routes here... */}
+    <Switch>
+      <Route exact path={match.path} render={ () => <Redirect to={`${match.path}/html`} /> } />
+      <Route exact path={`${match.path}/html`} component={HTML} />
+      <Route exact path={`${match.path}/css`} component={CSS} />
+      <Route exact path={`${match.path}/javascript`} component={JavaScript} />
+      <Route component={NotFound} />
+    </Switch>
   </div>
 );
 
